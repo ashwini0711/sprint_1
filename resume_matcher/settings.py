@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE':'django.db.backends.mysql',
         'NAME':'resume_matcher',
         'USER':'root',
-        'PASSWORD':'security',
+        'PASSWORD':'**********',
         'HOST':'localhost',
         'PORT':'3306',
         'OPTIONS': {
