@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata about character encoding and responsiveness -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+    <style>
+        /* Apply box-sizing to include padding and border in element's total width and height */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Style for the entire page body */
+        body {
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            font-family: 'Times New Roman', Times, serif; /* Set font style */
+            /* Background with a smooth gradient */
+            background: linear-gradient(135deg, #c2e9fb, #a1c4fd);
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+        }
+
+        /* Main container holding the registration form */
+        .container {
+            background: white; /* White background for contrast */
+            padding: 40px 30px; /* Padding inside the container */
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Soft shadow */
+            width: 100%; /* Full width but constrained by max-width */
+            max-width: 420px; /* Max width of container */
+            text-align: center; /* Center text inside container */
+            animation: slideFade 0.7s ease; /* Fade-in animation */
+        }
+
+        /* Heading style */
+        h2 {
+            margin-bottom: 20px; /* Space below heading */
+            color: #333; /* Dark gray text */
+        }
+
+        /* Styles for all text input fields, email, password and select dropdown */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%; /* Full width inputs */
+            padding: 12px 15px; /* Padding inside inputs */
+            margin: 10px 0; /* Vertical spacing between inputs */
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 30px; /* Rounded edges */
+            font-size: 16px; /* Font size for readability */
+        }
+
+        /* Submit button style */
+        button {
+            width: 100%; /* Full width button */
+            padding: 12px; /* Padding inside button */
+            background-color: #28a745; /* Green background */
+            border: none; /* No border */
+            border-radius: 30px; /* Rounded edges */
+            color: white; /* White text */
+            font-size: 16px; /* Font size */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s ease; /* Smooth color transition on hover */
+        }
+
+        /* Button hover effect */
+        button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        /* Paragraph below the form */
+        p {
+            margin-top: 15px; /* Space above paragraph */
+            font-size: 14px; /* Slightly smaller text */
+        }
+
+        /* Style for links */
+        a {
+            color: #28a745; /* Green color matching button */
+            text-decoration: none; /* No underline */
+            font-weight: 500; /* Medium font weight */
+        }
+
+        /* Link hover effect */
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        /* Animation for container fade and slide up */
+        @keyframes slideFade {
+            from {
+                opacity: 0;
+                transform: translateY(30px); /* Start slightly below */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); /* End at normal position */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Registration form container -->
+    <div class="container">
+        <h2>Registration</h2>
+        <!-- Form sends POST request when submitted -->
+        <form method="POST">
+            {% csrf_token %} <!-- CSRF token for security in Django -->
+
+            <!-- Username input field -->
+            <input type="text" name="username" placeholder="Your Name" required>
+
+            <!-- Email input field -->
+            <input type="email" name="email" placeholder="Your Email" required>
+
+            <!-- Dropdown to select user role -->
+            <select name="role" required>
+                <option value="">Select Role</option> <!-- Placeholder option -->
+                <option value="Student">Student</option> <!-- Option 1 -->
+                <option value="Employee">Employee</option> <!-- Option 2 -->
+            </select>
+
+            <!-- Password input -->
+            <input type="password" name="password" placeholder="Password" required>
+
+            <!-- Confirm password input -->
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+
+            <!-- Submit button -->
+            <button type="submit">Register</button>
+        </form>
+
+        <!-- Link for users who already have an account -->
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </div>
+
+</body>
+</html>

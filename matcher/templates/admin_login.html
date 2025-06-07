@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Set character encoding -->
+    <meta charset="UTF-8">
+    <!-- Page title -->
+    <title>Admin Login</title>
+    <style>
+        /* Body styling: font, background gradient, flexbox centering */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: linear-gradient(135deg, #c2e9fb, #a1c4fd);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            margin: 0; /* Remove default margin */
+        }
+        /* Container styling: white background, padding, rounded corners, shadow,
+           max width for responsiveness, centered text */
+        .container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        /* Heading styles with margin and color */
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        /* Input fields styling: full width, padding, margin, border, rounded corners, font size */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 30px;
+            font-size: 16px;
+        }
+        /* Button styling: full width, padding, background color, no border, rounded corners,
+           white text, cursor pointer, smooth transition */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff; /* Bootstrap primary blue */
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        /* Button hover effect: darken background */
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Admin Login form -->
+        <h2>Admin Login</h2>
+        <form method="POST" action="{% url 'admin_login' %}">
+            {% csrf_token %} <!-- CSRF token for Django security -->
+
+            <!-- Username input -->
+            <input type="text" name="username" placeholder="Admin Username" required>
+            <!-- Password input -->
+            <input type="password" name="password" placeholder="Admin Password" required>
+            <!-- Submit button -->
+            <button type="submit">Login as Admin</button>
+        </form>
+    </div>
+</body>
+</html>

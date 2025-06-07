@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        /* Basic styling for the whole page */
+        body {
+            font-family: 'Times New Roman', Times, serif; /* Classic serif font */
+            background-color: #f4f7fc; /* Light background fallback */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Flexbox centering */
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Gradient background */
+        }
+
+        /* Container styling */
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px 50px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            width: 100%;
+            max-width: 400px; /* Responsive max width */
+            animation: fadeIn 1s ease-out; /* Smooth fade-in animation */
+        }
+
+        /* Main heading style */
+        h1 {
+            font-size: 2.5em;
+            color: #333; /* Dark text */
+            margin-bottom: 20px;
+        }
+
+        /* Highlight class for emphasis */
+        .highlight {
+            color: #007bff; /* Blue color */
+            font-weight: 700; /* Bold text */
+        }
+
+        /* Button styling */
+        .btn {
+            display: inline-block;
+            margin: 10px 20px;
+            padding: 12px 30px;
+            font-size: 16px;
+            text-decoration: none; /* Remove underline */
+            color: white;
+            background-color: #007bff; /* Blue button background */
+            border-radius: 30px; /* Rounded button */
+            transition: background-color 0.3s; /* Smooth hover transition */
+        }
+
+        /* Button hover effect */
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* Grouping buttons */
+        .button-group {
+            margin-top: 20px;
+        }
+
+        /* Fade-in animation keyframes */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px); /* Slight downward offset */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); /* Normal position */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Centered container with welcome message and buttons -->
+    <div class="container">
+        <h1>Welcome to <span class="highlight">Resume Matcher</span></h1>
+        <div class="button-group">
+            <!-- Link to login page -->
+            <a href="{% url 'login' %}" class="btn">Login</a>
+            <!-- Link to registration page -->
+            <a href="{% url 'register' %}" class="btn">Register</a>
+            <!-- Admin login link (styled as a simple text link) -->
+            <p><a href="{% url 'admin_login' %}">Admin Login</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

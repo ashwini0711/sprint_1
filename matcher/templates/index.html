@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Matcher</title>
+
+    <!-- Bootstrap CSS for responsive layout and styling -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        /* Set background color of the entire page */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        /* Container margin for spacing from top */
+        .container {
+            margin-top: 50px;
+        }
+
+        /* Styling the card container */
+        .card {
+            padding: 20px; /* Inner padding */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+        }
+
+        /* Header of the card with blue background and white text */
+        .card-header {
+            background-color: #007bff; /* Bootstrap primary blue */
+            color: white;
+            border-radius: 10px 10px 0 0; /* Rounded top corners only */
+            padding: 10px 20px; /* Padding inside header */
+        }
+
+        /* Padding for the card body section */
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Bottom margin for form groups to space out inputs */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Style user messages with right alignment and blue color */
+        .user-message {
+            text-align: right;
+            color: blue;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main card container for the resume matcher form -->
+        <div class="card">
+
+            <!-- Card header with title centered -->
+            <div class="card-header text-center">
+                <h2>Job Description and Resume Matcher</h2>
+            </div>
+
+            <!-- Card body containing the form and results -->
+            <div class="card-body">
+                <!-- Form to submit job description and upload resumes -->
+                <form method="POST" action="{% url 'matcher' %}" enctype="multipart/form-data">
+                    {% csrf_token %} <!-- CSRF protection token -->
+
+                    <!-- Job Description input as a textarea -->
+                    <div class="form-group">
+                        <label for="job_description">Job Description:</label>
+                        <textarea class="form-control" id="job_description" name="job_desc_text" rows="5" required>{{ job_desc }}</textarea>
+                    </div>
+
+                    <!-- Resume file upload input, accepts multiple files -->
+                    <div class="form-group">
+                        <label for="resumes">Upload Resumes:</label>
+                        <input type="file" class="form-control" id="resumes" name="resumes" multiple required accept=".pdf, .docx, .txt">
+                    </div>
+
+                    <!-- Submit button styled with Bootstrap primary button -->
+                    <button type="submit" class="btn btn-primary">Match Resumes</button>
+                </form>
+
+                <!-- Display list of uploaded resume filenames, if any -->
+                {% if uploaded_filenames %}
+                    <div class="mt-4">
+                        <h5>Uploaded Resumes:</h5>
+                        <ul>
+                            {% for name in uploaded_filenames %}
+                                <li>{{ name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <!-- Display matching results table, if any -->
+                {% if results %}
+                    <div class="alert alert-info mt-4">
+                        <h5>Matching Results:</h5>
+                    </div>
+
+                    <!-- Table displaying each resume's name, match score, and missing skills -->
+                    <table class="table table-bordered mt-3">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Resume Name</th>
+                                <th>Match Score</th>
+                                <th>Missing Skills</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for resume in results %}
+                                <tr>
+                                    <td>{{ resume.resume_name }}</td>
+                                    <td>{{ resume.similarity_score }}%</td>
+                                    <td>{{ resume.missing_skills }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap and dependencies JS for interactivity -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

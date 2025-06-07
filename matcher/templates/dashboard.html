@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character encoding and page title -->
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    
+    <!-- Google Fonts: Roboto for modern clean font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Set box-sizing to border-box for all elements */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Body styles: remove margin/padding, use Roboto font, gradient background,
+           full viewport height, flexbox centering */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Container styles: white background, padding, rounded corners, shadow,
+           max width for responsiveness, center text, fadeInUp animation */
+        .container {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Heading styles with margin, font size and color */
+        h2 {
+            margin-bottom: 10px;
+            font-size: 28px;
+            color: #333;
+        }
+
+        /* Paragraph styling with margin and color */
+        p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Common button styles: padding, font size, rounded corners,
+           background color, no border, white text, pointer cursor,
+           smooth background transition, margin for spacing, inline-block display */
+        .btn {
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 25px;
+            background-color: #007bff; /* Bootstrap primary blue */
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none; /* Remove underline for links */
+            margin: 10px 5px;
+            display: inline-block;
+        }
+
+        /* Button hover effect: darken the blue */
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Logout button overrides with red background */
+        .btn-logout {
+            background-color: #dc3545; /* Bootstrap danger red */
+        }
+
+        /* Logout hover effect: darken red */
+        .btn-logout:hover {
+            background-color: #b02a37;
+        }
+
+        /* Fade in and slide up animation keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Centered container showing welcome message -->
+    <div class="container">
+        <!-- Dynamic username display -->
+        <h2>Welcome, {{ username }}!</h2>
+        <p>You have successfully logged in.</p>
+        
+        <!-- Link button to resume matcher page -->
+        <a href="{% url 'index' %}" class="btn">Go to Resume Matcher</a>
+        
+        <!-- Logout button -->
+        <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a>
+    </div>
+</body>
+</html>

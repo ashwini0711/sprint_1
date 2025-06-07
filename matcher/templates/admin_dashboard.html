@@ -1,0 +1,109 @@
+{% load custom_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  /* Set font */
+            background: linear-gradient(135deg, #d4fc79, #96e6a1);       /* Gradient background */
+            margin: 0; padding: 0;                                       /* Remove default spacing */
+        }
+
+        .container {
+            max-width: 1100px; margin: auto; padding: 40px;             /* Center and pad container */
+            background: white; margin-top: 50px; border-radius: 12px;   /* White bg and rounded corners */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);                     /* Shadow effect */
+        }
+
+        h1 {
+            text-align: center; color: #333;                            /* Centered heading */
+        }
+
+        a.logout-btn {
+            display: inline-block; padding: 10px 20px;                  /* Logout button styling */
+            background: #ff4d4d; color: white; text-decoration: none;
+            border-radius: 8px; float: right; margin-top: -50px;
+        }
+
+        h2 {
+            margin-top: 40px; color: #444; border-bottom: 2px solid #ccc; /* Section heading */
+            padding-bottom: 5px;
+        }
+
+        table {
+            width: 100%; border-collapse: collapse; margin-top: 15px;   /* Full-width table */
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;                                     /* Table borders */
+        }
+
+        th, td {
+            padding: 12px; text-align: center;                          /* Padding and center text */
+        }
+
+        th {
+            background-color: #4CAF50; color: white;                   /* Header background */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;                                  /* Zebra striping */
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;                                  /* Hover effect */
+        }
+
+        .btn {
+            padding: 6px 12px; border-radius: 6px; text-decoration: none; /* Button base style */
+            color: white; font-size: 14px;
+        }
+
+        .view-btn {
+            background-color: #007bff;                                  /* Blue button */
+        }
+
+        .view-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-btn {
+            background-color: #ff4d4d;                                  /* Red button */
+        }
+
+        .delete-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome Admin <!-- show logged-in admin username --> {{ request.user.username }}</h1>
+    <a href="{% url 'logout' %}" class="logout-btn">Logout</a> <!-- logout link -->
+
+    <h2>All Users</h2>
+    <table>
+        <tr>
+            <th>Username</th> <!-- table headers -->
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in users %} <!-- loop through users -->
+        <tr>
+            <td>{{ user.username }}</td> <!-- display username -->
+            <td>{{ user.email }}</td> <!-- display email -->
+            <td>{{ user_roles|get_item:user.id }}</td> <!-- get user role using custom filter -->
+            <td>
+                <a href="{% url 'user_match_history' user.id %}" class="btn view-btn">View Details</a> <!-- view user history -->
+                <a href="{% url 'delete_user' user.id %}" class="btn delete-btn" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a> <!-- delete user with confirmation -->
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+</body>
+</html>

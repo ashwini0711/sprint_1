@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ user.username }}'s Match History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f3;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 900px;
+            margin: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a.back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        a.back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Page heading showing the username -->
+    <h2>Match History for {{ user.username }}</h2>
+
+    <!-- Table to display the match records -->
+    <table>
+        <tr>
+            <th>Resume</th>
+            <th>Score</th>
+            <th>Missing Skills</th>
+            <th>Date</th>
+        </tr>
+        <!-- Loop through each match and display data -->
+        {% for match in matches %}
+        <tr>
+            <td>{{ match.resume_name }}</td>
+            <td>{{ match.match_score }}</td>
+            <td>{{ match.missing_skills }}</td>
+            <td>{{ match.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Link back to admin dashboard -->
+    <a class="back-link" href="{% url 'admin_dashboard' %}">&larr; Back to Admin Dashboard</a>
+</div>
+</body>
+</html>

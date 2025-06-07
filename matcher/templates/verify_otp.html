@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify OTP & Reset Password</title>
+    <!-- Bootstrap 4 CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                <!-- Card container -->
+                <div class="card shadow rounded">
+                    <!-- Card header with green background -->
+                    <div class="card-header bg-success text-white text-center">
+                        <h4>Verify OTP & Reset Password</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Form to submit OTP and new password -->
+                        <form method="POST" action="{% url 'verify_otp' %}">
+                            {% csrf_token %}
+                            <!-- Hidden input to carry user email -->
+                            <input type="hidden" name="email" value="{{ email }}">
+                            
+                            <!-- OTP input field -->
+                            <div class="form-group">
+                                <label for="otp">Enter OTP:</label>
+                                <input type="text" class="form-control" name="otp" required>
+                            </div>
+                            
+                            <!-- New password input field -->
+                            <div class="form-group">
+                                <label for="new_password">New Password:</label>
+                                <input type="password" class="form-control" name="new_password" required>
+                            </div>
+                            
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-success btn-block">Reset Password</button>
+                        </form>
+
+                        <!-- Message display area (e.g. success or error) -->
+                        {% if message %}
+                            <div class="alert alert-info mt-3">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

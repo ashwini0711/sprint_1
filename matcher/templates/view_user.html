@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Details</title>
+    <style>
+        /* Basic page styling */
+        body {
+            font-family: Arial, sans-serif; /* Clean sans-serif font */
+            background: linear-gradient(135deg, #f6d365, #fda085); /* Warm gradient background */
+            padding: 40px; /* Padding around the content */
+        }
+
+        /* Card container for user details */
+        .card {
+            max-width: 600px;
+            margin: auto; /* Center horizontally */
+            background: white;
+            padding: 30px;
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Soft shadow */
+        }
+
+        /* Heading styles */
+        h2 {
+            text-align: center;
+            color: #333; /* Dark text color */
+        }
+
+        /* Paragraph styling for user info */
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        /* Table styles for resume match list */
+        table {
+            width: 100%;
+            border-collapse: collapse; /* No double borders */
+            margin-top: 20px;
+        }
+
+        /* Table cell and header styling */
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd; /* Light border */
+            text-align: center;
+        }
+
+        /* Table header background */
+        th {
+            background: #4CAF50; /* Green header */
+            color: white;
+        }
+
+        /* Back button styles */
+        a.back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #007bff; /* Bootstrap blue */
+            color: white;
+            text-decoration: none; /* Remove underline */
+            border-radius: 6px;
+        }
+
+        /* Back button hover effect */
+        a.back-btn:hover {
+            background: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <!-- User info section -->
+    <h2>User Details</h2>
+    <p><strong>Username:</strong> {{ user_obj.username }}</p>
+    <p><strong>Email:</strong> {{ user_obj.email }}</p>
+    <!-- Conditional display of role based on is_staff -->
+    <p><strong>Role:</strong> {% if user_obj.is_staff %}Admin{% else %}User{% endif %}</p>
+
+    <!-- Resume match records -->
+    <h3>Resume Matches</h3>
+    {% if matches %}
+    <table>
+        <tr>
+            <th>Resume</th>
+            <th>Score</th>
+            <th>Missing Skills</th>
+            <th>Date</th>
+        </tr>
+        {% for match in matches %}
+        <tr>
+            <td>{{ match.resume_name }}</td>
+            <td>{{ match.match_score }}</td>
+            <td>{{ match.missing_skills }}</td>
+            <td>{{ match.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <!-- Display if no matches found -->
+    <p>No matches found.</p>
+    {% endif %}
+
+    <!-- Link back to admin dashboard -->
+    <a href="{% url 'admin_dashboard' %}" class="back-btn">← Back to Dashboard</a>
+</div>
+</body>
+</html>
